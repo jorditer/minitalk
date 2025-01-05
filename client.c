@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 11:02:51 by anlima            #+#    #+#             */
-/*   Updated: 2025/01/05 23:12:05 by jordi            ###   ########.fr       */
+/*   Created: 2025/01/06 00:09:31 by jordi             #+#    #+#             */
+/*   Updated: 2025/01/06 00:09:34 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_send_signal(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(100);
+		usleep(200);
 	}
 }
 

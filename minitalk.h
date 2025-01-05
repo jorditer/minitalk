@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anlima <anlima@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 11:10:18 by anlima            #+#    #+#             */
-/*   Updated: 2023/03/08 14:44:51 by anlima           ###   ########.fr       */
+/*   Created: 2025/01/06 00:09:59 by jordi             #+#    #+#             */
+/*   Updated: 2025/01/06 00:09:59 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef MINITALK_H
 # define MINITALK_H
