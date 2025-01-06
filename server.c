@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 00:09:42 by jordi             #+#    #+#             */
-/*   Updated: 2025/01/06 00:09:43 by jordi            ###   ########.fr       */
+/*   Updated: 2025/01/06 13:00:39 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	sig_handle(int signal)
 }
 
 //sigemptyset() Initializes the signal mask
+//SA_RESTART the program restarts after sending the signal no EINTR
 int	main(void)
 {
 	struct sigaction	sigact;
@@ -64,10 +65,10 @@ int	main(void)
 		write(2, "Signal setup failed\n", 19);
 		return (1);
 	}
-	write(1, "\e[4:1mJelou! Vamos a ir empezando la correccion...\e[4:0m\n", 58);
+	write(1, "\e[4:1mJelou! Vamos a empezar la correccion...\e[4:0m\n", 53);
 	write(1, "Server ready, PID = ", 20);
 	ft_putnbr(pid);
 	write(1, "\n", 1);
 	while (1)
-		usleep(200);
+		usleep(250);
 }

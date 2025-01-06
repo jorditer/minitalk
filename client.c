@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 00:09:31 by jordi             #+#    #+#             */
-/*   Updated: 2025/01/06 00:09:34 by jordi            ###   ########.fr       */
+/*   Updated: 2025/01/06 12:54:48 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,17 @@ int	ft_atoi(char *str)
 
 void	ft_send_signal(int pid, char c)
 {
-	int	arr[8];
-	int	n;
 	int	i;
 
-	n = c;
 	i = 7;
 	while (i >= 0)
 	{
-		if (n == 0 || (n & 1) == 0)
-			arr[i] = 0;
-		else if ((n & 1) == 1)
-			arr[i] = 1;
-		if (n > 0)
-			n >>= 1;
-		i--;
-	}
-	while (++i < 8)
-	{
-		if (arr[i] == 0)
-			kill(pid, SIGUSR1);
-		else
+		if (c & (1 << i))
 			kill(pid, SIGUSR2);
-		usleep(200);
+		else
+			kill(pid, SIGUSR1);
+		usleep(250);
+		i--;
 	}
 }
 
