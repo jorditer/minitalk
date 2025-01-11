@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 00:09:42 by jordi             #+#    #+#             */
-/*   Updated: 2025/01/06 13:00:39 by jordi            ###   ########.fr       */
+/*   Updated: 2025/01/11 12:42:24 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ void	ft_putnbr(long nbr)
 	write(1, &temp, 1);
 }
 
-void	sig_handle(int signal)
+void	sig_handle(int signal, siginfo_t *signal_info, void *context)
 {
 	static int	i;
 	static int	n;
 	int			nb;
+
+	(void)context;
 
 	if (signal == SIGUSR1)
 		nb = 0;
@@ -41,6 +43,7 @@ void	sig_handle(int signal)
 		i = 0;
 		n = 0;
 	}
+	kill(signal_info->si_pid, SIGUSR1);  // Send acknowledgment back
 }
 
 //sigemptyset() Initializes the signal mask
@@ -56,9 +59,10 @@ int	main(void)
 		write(2, "Error: Invalid process ID\n", 25);
 		return (1);
 	}
+	sigact.sa_sigaction = &sig_handle;  // Use sa_sigaction instead of sa_handler
 	sigemptyset(&sigact.sa_mask);
-	sigact.sa_handler = &sig_handle;
-	sigact.sa_flags = SA_RESTART;
+	// sigact.sa_handler = &sig_handle;
+	sigact.sa_flags = SA_SIGINFO | SA_RESTART;
 	if (sigaction(SIGUSR1, &sigact, NULL) == -1
 		|| sigaction(SIGUSR2, &sigact, NULL) == -1)
 	{
