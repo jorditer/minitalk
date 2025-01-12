@@ -20,7 +20,7 @@ $(CLIENT):	$(CLIENT).c minitalk.h
 $(NAME):	$(SERVER) $(CLIENT)
 
 clean:
-			@echo "Make clean/fclean\n$()Removing all compiled files."
+			@echo "Make clean/fclean\nRemoving all compiled files."
 			@$(RM) $(CLIENT) $(SERVER)
 
 fclean:		clean

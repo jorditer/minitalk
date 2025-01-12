@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Start server in background and get its PID directly
+./server &
+SERVER_PID=$!
+sleep 1
+
+# Verify server is running
+if ! ps -p $SERVER_PID > /dev/null; then
+    echo "Error: Server failed to start"
+    exit 1
+fi
+
+# Send test messages
+if [[ $1 != "-b" ]]; then
+    echo -e "\e[1m\e[4mMandatory part:\e[0m"
+    ./client "$SERVER_PID" "this is a bit of text to test"
+    ./client "$SERVER_PID" "test message this is more and more and more text 1268479109817378"
+    ./client "$SERVER_PID" "test message this is more and more and more text 1268479109817378 more and more!! even moree! we could even put a thousand! 11123334 this approach is not a 100% secure as we don't have bit confirmation, and that would mean to create a struct, handle its data...no way i am doing that if not needed!! The simple wins over the complicated (bueno veremos en la correccion)"
+fi
+# Test bonus with "-b" flag (and only bonus)
+if [[ $1 != "-m" ]]; then
+    MESSAGE=""
+    for i in {1..50}; do
+        MESSAGE+="Test message $i with emojis 🎮 🎲 🎯 🎳\n"
+        MESSAGE+="Special chars: ǹñóẃáḱǵéá\n"
+        MESSAGE+="Numbers: $i ${RANDOM} ${RANDOM}\n"
+    done
+    ./client "$SERVER_PID" "$(printf "$MESSAGE")"
+    echo -e "\e[1m\e[4mBonus part:\e[0m"
+    ./client "$SERVER_PID" "$(printf "Testeando emojis pal bonus 🥲🥲🥲🥲\n🦝\n🐱🎛️🦧\n👑👑👑👑\nahora simbolos raros: @ǹñóẃáḱǵéáẃćníýæŕÈèē")"
+fi
+
+# Wait and cleanup
+kill "$SERVER_PID"
