@@ -20,6 +20,7 @@ if [[ $1 != "-b" ]]; then
 fi
 # Test bonus with "-b" flag (and only bonus)
 if [[ $1 != "-m" ]]; then
+    echo -e "\e[1m\e[4mBonus part:\e[0m"
     MESSAGE=""
     for i in {1..50}; do
         MESSAGE+="Test message $i with emojis 🎮 🎲 🎯 🎳\n"
@@ -27,7 +28,6 @@ if [[ $1 != "-m" ]]; then
         MESSAGE+="Numbers: $i ${RANDOM} ${RANDOM}\n"
     done
     ./client "$SERVER_PID" "$(printf "$MESSAGE")"
-    echo -e "\e[1m\e[4mBonus part:\e[0m"
     ./client "$SERVER_PID" "$(printf "Testeando emojis pal bonus 🥲🥲🥲🥲\n🦝\n🐱🎛️🦧\n👑👑👑👑\nahora simbolos raros: @ǹñóẃáḱǵéáẃćníýæŕÈèē")"
 fi
 

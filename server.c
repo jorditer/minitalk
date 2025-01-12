@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 00:09:42 by jordi             #+#    #+#             */
-/*   Updated: 2025/01/12 15:38:24 by jordi            ###   ########.fr       */
+/*   Updated: 2025/01/12 15:54:02 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_putnbr(long nbr);
 /**
 * @struct sigaction
 * 
-* @brief Structure used to describe an action to be taken for a signal.
+* Structure used to describe an action to be taken for a signal.
 * @var sigaction::sa_handler && sigaction::sa_sigaction
 * Pointer to a signal-catching function, sa_sigaction expanded version
 * @var sigaction::sa_mask
@@ -64,7 +64,10 @@ int	main(void)
 // if there are more bytes left in byte it doesn't do anything
 // if it has reached the end it writes it and sets the index to 0
 // The conditional is for security, the terminal wouldn't print uncomplete utf-8
-// 0x80 = 10000000, 0xE0 = 11000000, 0XF0 = 11100000,...
+// It would buffer it internally until it reveives all the bytes
+// 0x80 = 10000000, 0xC0 = 11000000, 0xE0 = 11100000, 0XF0 = 11110000,...
+// The first byte symbols the number of bytes the utf-8 character will have
+// 0xxxxx = 1 byte, 110xxx = 2 byte, 1110xx, = 3, 11110xx = 4, etc.
 // ASCII is only 7-bits
 void	process_byte(char *buff, int *buff_index, unsigned char byte)
 {
