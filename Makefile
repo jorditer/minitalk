@@ -14,7 +14,7 @@ $(SERVER):	$(SERVER).c minitalk.h
 			@$(CC) $(CFLAGS) -o $(SERVER) $(SERVER).c
 
 $(CLIENT):	$(CLIENT).c minitalk.h
-			@echo "Compiling the Client.\n"
+			@echo "Compiling the Client."
 			@$(CC) $(CFLAGS) -o $(CLIENT) $(CLIENT).c
 
 $(NAME):	$(SERVER) $(CLIENT)
